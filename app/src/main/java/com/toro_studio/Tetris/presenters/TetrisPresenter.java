@@ -3,17 +3,20 @@ package com.toro_studio.Tetris.presenters;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.support.v4.content.ContextCompat;
 
+import com.toro_studio.Tetris.R;
+import com.toro_studio.Tetris.tools.ChainPaint;
 import com.toro_studio.Tetris.views.GameActivity;
 import com.toro_studio.Tetris.constraints.IGamePresetner;
 import com.toro_studio.Tetris.entities.Constants;
 import com.toro_studio.Tetris.constraints.ITetrimino;
 import com.toro_studio.Tetris.entities.TetriminoPiece;
 import com.toro_studio.Tetris.models.TetrisModel;
-import com.toro_studio.Tetris.tools.PaintCreator;
 import com.toro_studio.Tetris.constraints.IGameViews;
 
 import java.util.ArrayList;
@@ -568,10 +571,27 @@ public class TetrisPresenter implements IGamePresetner {
         models.setButton2(createButton2Rect());
         models.setControllerRectTopBottom(createTopBottomControllerRect());
         models.setControllerRectLeftRight(createLeftRightControllerRect());
-        models.setPaint(PaintCreator.getInstance().getGridPaint());
-        models.setBlockPaint(PaintCreator.getInstance().getBlockPaint());
-        models.setStoredPaint(PaintCreator.getInstance().getStorePaint());
-        models.setGohstPaint(PaintCreator.getInstance().getGohstPaint());
+        models.setPaint(
+                ChainPaint.newInstance()
+                        .addAlias(true)
+                        .addColor(Color.WHITE)
+                        .addStyle(Paint.Style.STROKE)
+                        .addStrokeWidth(1));
+        models.setBlockPaint(
+                ChainPaint.newInstance()
+                        .addAlias(true)
+                        .addColor(ContextCompat.getColor(context, R.color.colorBlock))
+                        .addStyle(Paint.Style.FILL_AND_STROKE));
+        models.setStoredPaint(
+                ChainPaint.newInstance()
+                        .addAlias(true)
+                        .addColor(ContextCompat.getColor(context, R.color.colorStore))
+                        .addStyle(Paint.Style.FILL_AND_STROKE));
+        models.setGohstPaint(
+                ChainPaint.newInstance()
+                        .addAlias(true)
+                        .addColor(ContextCompat.getColor(context, R.color.colorGohst))
+                        .addStyle(Paint.Style.FILL_AND_STROKE));
     }
 
     private int calculateStatusBarHeight(Context context) {
