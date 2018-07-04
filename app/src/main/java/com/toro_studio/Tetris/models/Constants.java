@@ -2,8 +2,6 @@ package com.toro_studio.Tetris.models;
 
 public class Constants {
 
-    public static final boolean DEBUG = false;
-
     public static final int GAME_COLUMNS = 12;
     public static final int GAME_ROWS = 27;
 
