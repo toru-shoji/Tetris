@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.util.Log;
 
 import com.toro_studio.Tetris.GameActivity;
 import com.toro_studio.Tetris.models.Constants;
@@ -24,11 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static com.toro_studio.Tetris.models.Constants.DEBUG;
-
 public class TetrisPresenter implements IGamePresetner{
-
-    private static final String TAG = "TetrisPresenter";
 
     private IGameViews views;
     private TetrisModels models;
@@ -41,9 +36,6 @@ public class TetrisPresenter implements IGamePresetner{
 
     @Override
     public final void drawGameScreen(Canvas canvas) {
-        if(DEBUG) {
-            Log.d(TAG, "drawGameScreen(" + canvas + ")");
-        }
         int columns = models.getColumns();
         int itemSize = models.getItemSize();
         Paint paint = models.getPaint();
@@ -80,9 +72,6 @@ public class TetrisPresenter implements IGamePresetner{
 
     @Override
     public final void touchControllerOrButton(int x, int y) {
-        if(DEBUG) {
-            Log.d(TAG, "touchControllerOrButton(" + x + ", " + y + ")");
-        }
         int itemSize = models.getItemSize();
         int columns = models.getColumns();
         int center = models.getTetrimiCenter();
@@ -135,9 +124,6 @@ public class TetrisPresenter implements IGamePresetner{
 
     @Override
     public final void fulfillRoleGame() {
-        if(DEBUG) {
-            Log.d(TAG, "fulfillRoleGame()");
-        }
         models.setTetrimiCenter(models.getTetrimiCenter() + models.getColumns());
         downTetrimino();
         displayGohstTetrimino();
@@ -145,9 +131,6 @@ public class TetrisPresenter implements IGamePresetner{
 
     @Override
     public final void initGameScreenInfo() {
-        if(DEBUG) {
-            Log.d(TAG, "initGameScreenInfo()");
-        }
         ArrayList<Rect> tmpRectArray = new ArrayList<>();
         int screenWidth = models.getScreenWidth();
         int columns = models.getColumns();
@@ -170,9 +153,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     synchronized private void createTetrimino() {
-        if(DEBUG) {
-            Log.d(TAG, "createTetrimino()");
-        }
         models.setMoveTetrimino(null);
         models.setMovePieceRect(null);
         models.setTetrimiCenter(-1);
@@ -194,9 +174,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private void downTetrimino() {
-        if(DEBUG) {
-            Log.d(TAG, "downTetrimino()");
-        }
         if(null == models.getMoveTetrimino()) {
             createTetrimino();
         }
@@ -221,9 +198,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private void fall2BottomTetrimino() {
-        if(DEBUG) {
-            Log.d(TAG, "fall2BottomTetrimino()");
-        }
         int weight = getWeightTetrimino();
         if(-1 == weight) {
             return;
@@ -236,9 +210,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private void turnTetrimino() {
-        if(DEBUG) {
-            Log.d(TAG, "turnTetrimino()");
-        }
         int columns = models.getColumns();
         int direct = models.getMoveTetrimino().getDirect();
         if(-1 == direct) {
@@ -268,9 +239,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private void judgeTetrimino() {
-        if(DEBUG) {
-            Log.d(TAG, "judgeTetrimino()");
-        }
         int columns = models.getColumns();
         List<Integer> storedPieceLocationArray = models.getStoredPieceLocationArray();
         List<Integer> tmpList = new ArrayList<>();
@@ -295,9 +263,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private void storeTetrimino() {
-        if(DEBUG) {
-            Log.d(TAG, "storeTetrimino()");
-        }
         int columns = models.getColumns();
         int rows = models.getRows();
         int tetriminoCenter = models.getTetrimiCenter();
@@ -328,9 +293,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private void displayGohstTetrimino() {
-        if(DEBUG) {
-            Log.d(TAG, "displayGohstTetrimino()");
-        }
         int weight = getWeightTetrimino();
         if(-1 == weight) {
             return;
@@ -350,9 +312,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private int getWeightTetrimino() {
-        if(DEBUG) {
-            Log.d(TAG, "getWeightTetrimino()");
-        }
         if(null == models.getMoveTetrimino() | null == models.getMovePieceRect()) {
             return -1;
         }
@@ -368,9 +327,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private List<Integer> initStoredPieceLocationArray() {
-        if(DEBUG) {
-            Log.d(TAG, "initStoredPieceLocationArray()");
-        }
         int columns = models.getColumns();
         int rows = models.getRows();
         List<Integer> list = new ArrayList<>();
@@ -381,9 +337,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private List<Integer> getTetriminoAbsLocate(Tetrimino tetrimino, int column, int center) {
-        if(DEBUG) {
-            Log.d(TAG, "getTetriminoAbsLocate(" + tetrimino + ", " + column + ", " + center + ")");
-        }
         if(null == tetrimino) {
             return null;
         }
@@ -399,10 +352,6 @@ public class TetrisPresenter implements IGamePresetner{
     private Map<Point, Rect> locateGohstTetrimino(List<Rect> screenRectList,
                                                  List<Integer> storedPieceLocationArray,
                                                  int column, Tetrimino tetrimino, int center) {
-        if(DEBUG) {
-            Log.d(TAG, "locateGohsttetrimino(" + screenRectList + ", " +
-                    storedPieceLocationArray + ", " + column + ", " + tetrimino + ", " + center + ")");
-        }
         List<Point> tmpPointList = tetrimino.getPointList(tetrimino.getDirect());
         Map<Point, Rect> tmpRectMap = calcRect2PointMap(screenRectList, tmpPointList, column, center);
         return tmpRectMap;
@@ -410,10 +359,6 @@ public class TetrisPresenter implements IGamePresetner{
 
     private List<Rect> locateTetrimino(int direct, List<Rect> screenRectList,
                                       List<Integer> storedPieceLocationArray, int column, Tetrimino tetrimino, int center) {
-        if(DEBUG) {
-            Log.d(TAG, "locateTetrimino(" + direct + ", " + screenRectList + ", " +
-                    column + ", " + ", " + ", " + tetrimino + ", " + center + ")");
-        }
         List<Point> tmpPointList = tetrimino.getPointList(direct);
         List<Rect> tmpRectList = calcRect2Point(screenRectList, tmpPointList, column, center);
         if(!checkVerticalMove(screenRectList, storedPieceLocationArray, tmpRectList, tmpPointList, column, center)) {
@@ -425,9 +370,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private void eraseRow(List<Integer> storedPieceLocationList, int columnCount, List<Integer> rowCount) {
-        if(DEBUG) {
-            Log.d(TAG, "eraseRow(" + storedPieceLocationList + ", " + columnCount + ", " + rowCount + ")");
-        }
         for(Integer i : rowCount) {
             for(int count = 0; count < columnCount; count++) {
                 storedPieceLocationList.remove(((i * columnCount) + count));
@@ -437,9 +379,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private boolean checkLeftTurn(List<Point> pointList, int center) {
-        if(DEBUG) {
-            Log.d(TAG, "checkLeftTurn(" + pointList + ", " + center + ")");
-        }
         for(Point point : pointList) {
             if(11 <= ((center + point.x) % 12)) {
                 return false;
@@ -449,9 +388,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private boolean checkRightTurn(List<Point> pointList, int center) {
-        if(DEBUG) {
-            Log.d(TAG, "checkRightTurn(" + pointList + ", " + center + ")");
-        }
         for(Point point : pointList) {
             if(((center + point.x) % 12) <= 0) {
                 return false;
@@ -461,9 +397,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private boolean checkLeftMove(List<Integer> storedPieceLocationArray, List<Point> pointList, int center) {
-        if(DEBUG) {
-            Log.d(TAG, "checkLeftMove(" + storedPieceLocationArray + ", " + pointList + ", " + center + ")");
-        }
         for(Point point : pointList) {
             if(0 == ((center + point.x) % 12)) {
                 return false;
@@ -482,9 +415,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private boolean checkRightMove(List<Integer> storedPieceLocationArray, List<Point> pointList, int center) {
-        if(DEBUG) {
-            Log.d(TAG, "checkRightMove(" + storedPieceLocationArray + ", " + pointList + ", " + center + ")x");
-        }
         for(Point point : pointList) {
             if(11 == (center + point.x) % 12) {
                 return false;
@@ -505,11 +435,6 @@ public class TetrisPresenter implements IGamePresetner{
     private boolean checkVerticalMove(List<Rect> screenRectList, List<Integer> storedPieceLocationArray,
                                       List<Rect> tmpRectList, List<Point> pointList, int column,
                                       int center) {
-        if(DEBUG) {
-            Log.d(TAG, "checkVerticalMove(" + screenRectList + ", " +
-                    storedPieceLocationArray + ", " + tmpRectList + ", " + pointList + ", " +
-                    column + ", " + center + ")");
-        }
         if(null == tmpRectList) {
             return false;
         }
@@ -537,10 +462,6 @@ public class TetrisPresenter implements IGamePresetner{
 
     private int getBottomTetrimino(List<Rect> screenRectList, List<Integer> storedListLocationArray,
                                   List<Point> pointList, int column, int center) {
-        if(DEBUG) {
-            Log.d(TAG, "getBottomTetrimino(" + screenRectList + ", " +
-                    storedListLocationArray + ", " + pointList + ", " + column + ", " + center + ")");
-        }
         Collections.sort(pointList, new Comparator<Point>() {
             @Override
             public int compare(Point point, Point t1) {
@@ -569,10 +490,6 @@ public class TetrisPresenter implements IGamePresetner{
 
     private Map<Point, Rect> calcRect2PointMap(List<Rect> screenRectList, List<Point> pointList,
                                                int column, int center) {
-        if(DEBUG) {
-            Log.d(TAG, "calcRect2PointMap(" + screenRectList + ", " + pointList + ", " +
-                    column + ", " + center + ")");
-        }
         Map<Point, Rect> tmpMap = new HashMap<>();
         for(Point point : pointList) {
             int locNo = getLocNo(point, column, center);
@@ -585,10 +502,6 @@ public class TetrisPresenter implements IGamePresetner{
 
     private List<Rect> calcRect2Point(List<Rect> screenRectList, List<Point> pointList, int column,
                                       int center) {
-        if(DEBUG) {
-            Log.d(TAG, "calcrect2Point(" + screenRectList + ", " + pointList + ", " +
-                    column + ", " + center + ")");
-        }
         if(null == pointList) {
             return null;
         }
@@ -604,9 +517,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private int getLocNo(Point point, int column, int center) {
-        if(DEBUG) {
-            Log.d(TAG, "getLocNo(" + point + ", " + column + ", " + center + ")");
-        }
         int locNo = -1;
         if(-2 == point.y) {
             locNo = center - (column * 2) + point.x;
@@ -627,10 +537,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private void initModels(Context context) {
-        if(DEBUG) {
-            Log.d(TAG, "initModels(" + context + ")");
-        }
-
         int columns = Constants.GAME_COLUMNS;
         int rows = Constants.GAME_ROWS;
         Resources resources = context.getResources();
@@ -668,9 +574,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private int calculateStatusBarHeight(Context context) {
-        if(DEBUG) {
-            Log.d(TAG, "calculateStatusBarHeight(" + context + ")");
-        }
         int result = 0;
         int resourceId = context.getResources().getIdentifier(
                 "status_bar_height", "dimen", "android");
@@ -681,9 +584,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private Rect createButton1Rect() {
-        if(DEBUG) {
-            Log.d(TAG, "createButton1Rect()");
-        }
         int itemSize = models.getItemSize();
         int button1Top = models.getGameScreenHeight() + models.getStatusBarHeight() + (itemSize * 3);
         int button1Left = (models.getScreenWidth() / 4) * 3;
@@ -692,9 +592,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private Rect createButton2Rect() {
-        if(DEBUG) {
-            Log.d(TAG, "createButton2Rect()");
-        }
         int itemSize = models.getItemSize();
         int button2Top = models.getGameScreenHeight() + models.getStatusBarHeight() + (itemSize * 3);
         int button2Left = (models.getScreenWidth() / 4) * 3 - (itemSize * 3);
@@ -703,9 +600,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private Rect createLeftRightControllerRect() {
-        if(DEBUG) {
-            Log.d(TAG, "createLeftRightControllerRect()");
-        }
         int itemSize = models.getItemSize();
         int controllerVLeft = models.getScreenWidth() / 4;
         int controllerVTop = models.getGameScreenHeight() + models.getStatusBarHeight() + itemSize;
@@ -717,9 +611,6 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private Rect createTopBottomControllerRect() {
-        if(DEBUG) {
-            Log.d(TAG, "createTopBottomControllerRect()");
-        }
         int itemSize = models.getItemSize();
         int controllerVLeft = models.getScreenWidth() / 4;
         int controllerVTop = models.getGameScreenHeight() + models.getStatusBarHeight() + itemSize;
