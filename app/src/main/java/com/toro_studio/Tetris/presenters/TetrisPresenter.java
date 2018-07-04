@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 
 import com.toro_studio.Tetris.R;
 import com.toro_studio.Tetris.tools.ChainPaint;
+import com.toro_studio.Tetris.tools.ChainRectF;
 import com.toro_studio.Tetris.views.GameActivity;
 import com.toro_studio.Tetris.constraints.IGamePresetner;
 import com.toro_studio.Tetris.entities.Constants;
@@ -146,7 +147,12 @@ public class TetrisPresenter implements IGamePresetner {
         int startY = 0;
         for(int count1 = 0; count1 < rows; count1++) {
             for(int count2 = 0; count2 < columns; count2++) {
-                Rect rect = new Rect(startX, startY, startX + itemSize, startY + itemSize);
+                Rect rect = ChainRectF.newInstance()
+                        .left(startX)
+                        .top(startY)
+                        .right(startX + itemSize)
+                        .bottom(startY + itemSize)
+                        .asRect();
                 tmpRectArray.add(rect);
                 startX += itemSize;
             }
@@ -608,16 +614,24 @@ public class TetrisPresenter implements IGamePresetner {
         int itemSize = models.getItemSize();
         int button1Top = models.getGameScreenHeight() + models.getStatusBarHeight() + (itemSize * 3);
         int button1Left = (models.getScreenWidth() / 4) * 3;
-        return new Rect(button1Left, button1Top, button1Left + (itemSize * 2),
-                button1Top + (itemSize * 2));
+        return ChainRectF.newInstance()
+                .left(button1Left)
+                .top(button1Top)
+                .right(button1Left + (itemSize * 2))
+                .bottom(button1Top + (itemSize * 2))
+                .asRect();
     }
 
     private Rect createButton2Rect() {
         int itemSize = models.getItemSize();
         int button2Top = models.getGameScreenHeight() + models.getStatusBarHeight() + (itemSize * 3);
         int button2Left = (models.getScreenWidth() / 4) * 3 - (itemSize * 3);
-        return new Rect(button2Left, button2Top, button2Left + (itemSize * 2),
-                button2Top + (itemSize * 2));
+        return ChainRectF.newInstance()
+                .left(button2Left)
+                .top(button2Top)
+                .right(button2Left + (itemSize * 2))
+                .bottom(button2Top + (itemSize * 2))
+                .asRect();
     }
 
     private Rect createLeftRightControllerRect() {
@@ -628,7 +642,12 @@ public class TetrisPresenter implements IGamePresetner {
         int controllerHTop = controllerVTop + (itemSize * 2);
         int controllerHRight = controllerHLeft + (itemSize * 6);
         int controllerHBottom = controllerHTop + (itemSize * 2);
-        return new Rect(controllerHLeft, controllerHTop, controllerHRight, controllerHBottom);
+        return ChainRectF.newInstance()
+                .left(controllerHLeft)
+                .top(controllerHTop)
+                .right(controllerHRight)
+                .bottom(controllerHBottom)
+                .asRect();
     }
 
     private Rect createTopBottomControllerRect() {
@@ -637,7 +656,12 @@ public class TetrisPresenter implements IGamePresetner {
         int controllerVTop = models.getGameScreenHeight() + models.getStatusBarHeight() + itemSize;
         int controllerVRight = controllerVLeft + (itemSize * 2);
         int controllerVBottom = controllerVTop + (itemSize * 6);
-        return new Rect(controllerVLeft, controllerVTop, controllerVRight, controllerVBottom);
+        return ChainRectF.newInstance()
+                .left(controllerVLeft)
+                .top(controllerVTop)
+                .right(controllerVRight)
+                .bottom(controllerVBottom)
+                .asRect();
     }
 
 }
