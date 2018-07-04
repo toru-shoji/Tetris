@@ -1,4 +1,4 @@
-package com.toro_studio.Tetris.models;
+package com.toro_studio.Tetris.entities;
 
 public class Constants {
 

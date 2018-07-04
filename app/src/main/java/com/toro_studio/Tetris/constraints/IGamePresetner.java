@@ -1,4 +1,4 @@
-package com.toro_studio.Tetris.presenter;
+package com.toro_studio.Tetris.constraints;
 
 import android.graphics.Canvas;
 

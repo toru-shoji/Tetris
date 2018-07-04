@@ -4,11 +4,13 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 
+import com.toro_studio.Tetris.constraints.ITetrimino;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class TetrisModels {
+public class TetrisModel {
 
     private int columns;
     private int rows;
@@ -30,7 +32,7 @@ public class TetrisModels {
     private Map<Point, Rect> gohstRectMap;
     private List<Rect> screenRectList;
 
-    private Tetrimino moveTetrimino;
+    private ITetrimino moveTetrimino;
     private int tetrimiCenter;
     private int[] blockArea;
 
@@ -167,11 +169,11 @@ public class TetrisModels {
         this.screenRectList = screenRectList;
     }
 
-    public Tetrimino getMoveTetrimino() {
+    public ITetrimino getMoveTetrimino() {
         return moveTetrimino;
     }
 
-    public void setMoveTetrimino(Tetrimino moveTetrimino) {
+    public void setMoveTetrimino(ITetrimino moveTetrimino) {
         this.moveTetrimino = moveTetrimino;
     }
 

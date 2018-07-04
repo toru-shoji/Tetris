@@ -1,11 +1,13 @@
-package com.toro_studio.Tetris.models;
+package com.toro_studio.Tetris.entities;
 
 import android.graphics.Point;
+
+import com.toro_studio.Tetris.constraints.ITetrimino;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TetriminoI implements Tetrimino {
+public class TetriminoI implements ITetrimino {
 
     private final List<List<Point>> pointList;
     private int direct;

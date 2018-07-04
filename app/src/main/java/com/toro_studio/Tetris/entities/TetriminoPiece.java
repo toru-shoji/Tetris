@@ -1,4 +1,6 @@
-package com.toro_studio.Tetris.models;
+package com.toro_studio.Tetris.entities;
+
+import com.toro_studio.Tetris.constraints.ITetrimino;
 
 public enum TetriminoPiece {
 
@@ -10,9 +12,9 @@ public enum TetriminoPiece {
     TetriminoL(new TetriminoL()),
     TetriminoT(new TetriminoT());
 
-    public Tetrimino tetrimino;
+    public ITetrimino tetrimino;
 
-    TetriminoPiece(Tetrimino tetrimino) {
+    TetriminoPiece(ITetrimino tetrimino) {
         this.tetrimino = tetrimino;
     }
 
