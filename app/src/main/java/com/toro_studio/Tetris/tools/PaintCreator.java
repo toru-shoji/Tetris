@@ -1,4 +1,4 @@
-package com.toro_studio.Tetris.utils;
+package com.toro_studio.Tetris.tools;
 
 import android.graphics.Color;
 import android.graphics.Paint;

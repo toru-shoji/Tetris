@@ -1,4 +1,4 @@
-package com.toro_studio.Tetris;
+package com.toro_studio.Tetris.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -12,10 +12,10 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
-import com.toro_studio.Tetris.models.Constants;
-import com.toro_studio.Tetris.presenter.IGamePresetner;
-import com.toro_studio.Tetris.presenter.TetrisPresenter;
-import com.toro_studio.Tetris.views.IGameViews;
+import com.toro_studio.Tetris.entities.Constants;
+import com.toro_studio.Tetris.constraints.IGamePresetner;
+import com.toro_studio.Tetris.presenters.TetrisPresenter;
+import com.toro_studio.Tetris.constraints.IGameViews;
 
 import java.util.Timer;
 import java.util.TimerTask;

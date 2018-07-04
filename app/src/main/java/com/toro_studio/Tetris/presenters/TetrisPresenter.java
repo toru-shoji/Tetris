@@ -1,4 +1,4 @@
-package com.toro_studio.Tetris.presenter;
+package com.toro_studio.Tetris.presenters;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -7,13 +7,14 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 
-import com.toro_studio.Tetris.GameActivity;
-import com.toro_studio.Tetris.models.Constants;
-import com.toro_studio.Tetris.models.Tetrimino;
-import com.toro_studio.Tetris.models.TetriminoPiece;
-import com.toro_studio.Tetris.models.TetrisModels;
-import com.toro_studio.Tetris.utils.PaintCreator;
-import com.toro_studio.Tetris.views.IGameViews;
+import com.toro_studio.Tetris.views.GameActivity;
+import com.toro_studio.Tetris.constraints.IGamePresetner;
+import com.toro_studio.Tetris.entities.Constants;
+import com.toro_studio.Tetris.constraints.ITetrimino;
+import com.toro_studio.Tetris.entities.TetriminoPiece;
+import com.toro_studio.Tetris.models.TetrisModel;
+import com.toro_studio.Tetris.tools.PaintCreator;
+import com.toro_studio.Tetris.constraints.IGameViews;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,14 +24,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class TetrisPresenter implements IGamePresetner{
+public class TetrisPresenter implements IGamePresetner {
 
     private IGameViews views;
-    private TetrisModels models;
+    private TetrisModel models;
 
     public TetrisPresenter(IGameViews views) {
         this.views = views;
-        models = new TetrisModels();
+        models = new TetrisModel();
         initModels(((GameActivity.GameSurfaceView)views).getContext());
     }
 
@@ -75,7 +76,7 @@ public class TetrisPresenter implements IGamePresetner{
         int itemSize = models.getItemSize();
         int columns = models.getColumns();
         int center = models.getTetrimiCenter();
-        Tetrimino moveTetrimino = models.getMoveTetrimino();
+        ITetrimino moveTetrimino = models.getMoveTetrimino();
         Rect leftRight = models.getControllerRectLeftRight();
         List<Integer> locationArray = models.getStoredPieceLocationArray();
         if(leftRight.contains(x, y)) {
@@ -336,7 +337,7 @@ public class TetrisPresenter implements IGamePresetner{
         return list;
     }
 
-    private List<Integer> getTetriminoAbsLocate(Tetrimino tetrimino, int column, int center) {
+    private List<Integer> getTetriminoAbsLocate(ITetrimino tetrimino, int column, int center) {
         if(null == tetrimino) {
             return null;
         }
@@ -350,15 +351,15 @@ public class TetrisPresenter implements IGamePresetner{
     }
 
     private Map<Point, Rect> locateGohstTetrimino(List<Rect> screenRectList,
-                                                 List<Integer> storedPieceLocationArray,
-                                                 int column, Tetrimino tetrimino, int center) {
+                                                  List<Integer> storedPieceLocationArray,
+                                                  int column, ITetrimino tetrimino, int center) {
         List<Point> tmpPointList = tetrimino.getPointList(tetrimino.getDirect());
         Map<Point, Rect> tmpRectMap = calcRect2PointMap(screenRectList, tmpPointList, column, center);
         return tmpRectMap;
     }
 
     private List<Rect> locateTetrimino(int direct, List<Rect> screenRectList,
-                                      List<Integer> storedPieceLocationArray, int column, Tetrimino tetrimino, int center) {
+                                       List<Integer> storedPieceLocationArray, int column, ITetrimino tetrimino, int center) {
         List<Point> tmpPointList = tetrimino.getPointList(direct);
         List<Rect> tmpRectList = calcRect2Point(screenRectList, tmpPointList, column, center);
         if(!checkVerticalMove(screenRectList, storedPieceLocationArray, tmpRectList, tmpPointList, column, center)) {

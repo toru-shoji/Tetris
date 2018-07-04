@@ -1,39 +1,41 @@
-package com.toro_studio.Tetris.models;
+package com.toro_studio.Tetris.entities;
 
 import android.graphics.Point;
+
+import com.toro_studio.Tetris.constraints.ITetrimino;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TetriminoL implements Tetrimino {
+public class TetriminoT implements ITetrimino {
 
     private final List<List<Point>> pointList;
     private int direct;
 
-    public TetriminoL() {
+    public TetriminoT() {
 
         List<Point> tmpList1 = new ArrayList<>();
-        tmpList1.add(new Point(-2, 0));
         tmpList1.add(new Point(-1, 0));
         tmpList1.add(new Point(0, 0));
+        tmpList1.add(new Point(1, 0));
         tmpList1.add(new Point(0, -1));
 
         List<Point> tmpList2 = new ArrayList<>();
-        tmpList2.add(new Point(-1, 0));
+        tmpList2.add(new Point(0, -1));
         tmpList2.add(new Point(0, 0));
         tmpList2.add(new Point(0, 1));
-        tmpList2.add(new Point(0, 2));
+        tmpList2.add(new Point(-1, 0));
 
         List<Point> tmpList3 = new ArrayList<>();
-        tmpList3.add(new Point(0, 1));
+        tmpList3.add(new Point(-1, 0));
         tmpList3.add(new Point(0, 0));
         tmpList3.add(new Point(1, 0));
-        tmpList3.add(new Point(2, 0));
+        tmpList3.add(new Point(0, 1));
 
         List<Point> tmpList4 = new ArrayList<>();
-        tmpList4.add(new Point(0, -2));
         tmpList4.add(new Point(0, -1));
         tmpList4.add(new Point(0, 0));
+        tmpList4.add(new Point(0, 1));
         tmpList4.add(new Point(1, 0));
 
         pointList = new ArrayList<>();
@@ -60,7 +62,7 @@ public class TetriminoL implements Tetrimino {
 
     @Override
     public String toString() {
-        return "TetriminoL{" +
+        return "TetriminoT{" +
                 "pointList=" + pointList +
                 ", direct=" + direct +
                 '}';

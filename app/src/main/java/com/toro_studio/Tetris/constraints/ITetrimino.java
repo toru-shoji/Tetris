@@ -1,10 +1,10 @@
-package com.toro_studio.Tetris.models;
+package com.toro_studio.Tetris.constraints;
 
 import android.graphics.Point;
 
 import java.util.List;
 
-public interface Tetrimino {
+public interface ITetrimino {
     List<Point> getPointList(int direct);
     int getDirect();
     void setDirect(int direct);
