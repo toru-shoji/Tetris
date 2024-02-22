@@ -5,12 +5,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.toro_studio.Tetris.entities.Constants;
 import com.toro_studio.Tetris.constraints.IGamePresetner;
